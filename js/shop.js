@@ -106,6 +106,20 @@ function calculateTotal() {
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+
+    cartList = cartList.map(v => ({ ...v, quantity: 1 })) //Adds quantity to objects of cartList[]
+
+    for (x = 0; x < cartList.length; x++) {
+        let index = cart.map(function (e) { return e.name; }).indexOf(cartList[x].name); //Loops through the original array and looks for duplicates using the name.
+
+        if (index === -1) { //If index = -1, it means that no diplicate has been found. We therefore push the object from the original array to the new one.
+            cart.push(cartList[x])
+        }
+        if (index !== -1) { //If index != -1, it means that a duplicate has been found, we therefore need to update the quantity value of the matching object.
+            cart[index].quantity += 1
+        }
+    }
+    console.log(cart)
 }
 
 // Exercise 5
